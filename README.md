@@ -24,3 +24,17 @@ A web-based complaint and waste management system developed using **PHP and MySQ
 
 ## Author
 Manoj Allu
+## Project Structure
+
+waste-segregation-system/
+├── images/
+├── uploads/
+├── screenshots/
+│
+├── config.php
+├── login.php
+├── register.php
+├── complaint.php
+├── admin_dashboard.php
+├── user_dashboard.php
+└── index.php
