@@ -1,22 +1,17 @@
 <?php
-// Start the session to use session variables
 session_start();
 
-// Database configuration
-$servername = "localhost";      // Database server
-$username = "root";             // XAMPP default username
-$password = "";                 // XAMPP default password (usually empty)
-$dbname = "waste_system";      // Your database name
+$servername = "sql212.infinityfree.com";
+$username = "if0_41303820";
+$password = "gmKuFlTIs2u8W";
+$dbname = "if0_41303820_waste_system";
 
-// Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Define reusable paths
-define('BASE_URL', 'http://localhost/waste_system/');
+define('BASE_URL', 'https://waste-segregation.gamer.gd/');
 define('UPLOAD_DIR', 'uploads/');
 ?>
