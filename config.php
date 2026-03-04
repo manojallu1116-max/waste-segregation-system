@@ -1,12 +1,9 @@
 <?php
 session_start();
 
-$servername = "sql212.infinityfree.com";
-$username = "if0_41303820";
-$password = "gmKuFlTIs2u8W";
-$dbname = "if0_41303820_waste_system";
+require '.env.php';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
