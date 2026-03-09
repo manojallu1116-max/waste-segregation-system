@@ -57,7 +57,7 @@ $result = $stmt->get_result();
           <td>
             <?php for ($i = 1; $i <= 3; $i++): ?>
               <?php if (!empty($row["image$i"])): ?>
-                <img src="uploads/<?php echo $row["image$i"]; ?>" alt="Image" class="img-thumbnail mb-1" style="max-width:100px;"><br>
+                <img src="<?php echo htmlspecialchars($row["image$i"]); ?>" alt="Image" class="img-thumbnail mb-1" style="max-width:100px;"><br>
               <?php endif; ?>
             <?php endfor; ?>
           </td>

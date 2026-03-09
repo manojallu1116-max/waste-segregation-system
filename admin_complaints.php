@@ -54,7 +54,7 @@ $result = $conn->query($sql);
           <td>
             <?php for ($i = 1; $i <= 3; $i++): ?>
               <?php if (!empty($row["image$i"])): ?>
-                <img src="uploads/<?php echo $row["image$i"]; ?>" alt="Image" class="img-thumbnail mb-1" style="max-width:80px;"><br>
+                <img src="<?php echo htmlspecialchars($row["image$i"]); ?>" alt="Image" class="img-thumbnail mb-1" style="max-width:80px;"><br>
               <?php endif; ?>
             <?php endfor; ?>
           </td>
