@@ -27,7 +27,7 @@ $result = $stmt->get_result();
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
   <a class="navbar-brand" href="user_dashboard.php">WasteSeg</a>
   <div class="ml-auto">
     <span class="navbar-text mr-2">Hello, <?php echo htmlspecialchars($_SESSION['username']); ?>!</span>
@@ -46,6 +46,7 @@ $result = $stmt->get_result();
           <th>Images</th>
           <th>Status</th>
           <th>Time</th>
+          <th>Feedback</th>
         </tr>
       </thead>
       <tbody>
@@ -63,6 +64,13 @@ $result = $stmt->get_result();
           </td>
           <td><?php echo ucfirst($row['status']); ?></td>
           <td><?php echo $row['timestamp']; ?></td>
+          <td>
+            <?php if($row['status'] === 'solved'): ?>
+              <a href="submit_feedback.php?complaint_id=<?php echo $row['id']; ?>" class="btn btn-sm btn-alt">Leave Feedback</a>
+            <?php else: ?>
+              &mdash;
+            <?php endif; ?>
+          </td>
         </tr>
         <?php endwhile; ?>
       </tbody>

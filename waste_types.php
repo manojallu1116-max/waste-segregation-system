@@ -8,23 +8,14 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
-
-// Sample data (you can replace these with your database fetch later)
-$wasteTypes = [
-    'Organic' => [
-        ['name' => 'Food Scraps', 'description' => 'Vegetable peels, fruit waste, and leftovers.'],
-        ['name' => 'Garden Waste', 'description' => 'Leaves, grass clippings, branches, etc.']
-    ],
-    'Recyclable' => [
-        ['name' => 'Plastic', 'description' => 'Bottles, containers, and packaging materials.'],
-        ['name' => 'Paper', 'description' => 'Newspapers, cardboard, magazines, and paper sheets.'],
-        ['name' => 'Glass', 'description' => 'Bottles, jars, and other glass items.']
-    ],
-    'Hazardous' => [
-        ['name' => 'Batteries', 'description' => 'Used batteries that need special disposal.'],
-        ['name' => 'Chemicals', 'description' => 'Cleaning agents, paints, solvents, etc.']
-    ]
-];
+// fetch waste types from database
+$wasteTypes = [];
+$sql = "SELECT * FROM waste_types ORDER BY name";
+$res = $conn->query($sql);
+while ($row = $res->fetch_assoc()) {
+    // you may want categories later; here we'll display flat
+    $wasteTypes[] = $row;
+}
 ?>
 
 
@@ -38,7 +29,7 @@ $wasteTypes = [
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
   <a class="navbar-brand" href="user_dashboard.php">WasteSeg</a>
   <div class="ml-auto">
     <span class="navbar-text mr-2">Hello, <?php echo htmlspecialchars($_SESSION['username']); ?>!</span>
@@ -53,32 +44,27 @@ $wasteTypes = [
     Click each section to learn how to manage these types effectively.
   </p>
 
-  <?php foreach($wasteTypes as $category => $items) { ?>
-  <div class="section mb-5">
-      <h2 class="mb-3"><?php echo $category; ?> Waste</h2>
-      <div class="row">
-          <?php foreach($items as $w) {
-              $imageFilename = strtolower(str_replace(' ','_',$w['name'])) . ".jpg";
-              $filesystemPath = __DIR__ . '/images/' . $imageFilename;
-              if (file_exists($filesystemPath)) {
-                  $displayPath = 'images/' . $imageFilename;
-              } else {
-                  $displayPath = 'https://via.placeholder.com/250x150?text=No+Image';
-              }
-          ?>
-          <div class="col-md-4 mb-4">
-              <div class="card card-custom h-100 text-center">
-                <img src="<?php echo $displayPath; ?>" class="card-img-top card-img-custom" alt="<?php echo htmlspecialchars($w['name']); ?>">
-                <div class="card-body">
-                  <h5 class="card-title"><?php echo htmlspecialchars($w['name']); ?></h5>
-                  <p class="card-text"><?php echo htmlspecialchars($w['description']); ?></p>
-                </div>
-              </div>
+  <div class="row">
+      <?php foreach($wasteTypes as $w) {
+          $imageFilename = strtolower(str_replace(' ','_',$w['name'])) . ".jpg";
+          $filesystemPath = __DIR__ . '/images/' . $imageFilename;
+          if (file_exists($filesystemPath)) {
+              $displayPath = 'images/' . $imageFilename;
+          } else {
+              $displayPath = 'https://via.placeholder.com/250x150?text=No+Image';
+          }
+      ?>
+      <div class="col-md-4 mb-4">
+          <div class="card card-custom h-100 text-center">
+            <img src="<?php echo $displayPath; ?>" class="card-img-top card-img-custom" alt="<?php echo htmlspecialchars($w['name']); ?>">
+            <div class="card-body">
+              <h5 class="card-title"><?php echo htmlspecialchars($w['name']); ?></h5>
+              <p class="card-text"><?php echo htmlspecialchars($w['description']); ?></p>
+            </div>
           </div>
-          <?php } ?>
       </div>
+      <?php } ?>
   </div>
-  <?php } ?>
 
   <div class="text-center mt-4">
       <a href="user_dashboard.php" class="btn btn-custom mr-2">&#8592; Back to Dashboard</a>

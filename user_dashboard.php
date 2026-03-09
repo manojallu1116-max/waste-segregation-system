@@ -18,7 +18,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'user') {
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
   <a class="navbar-brand" href="user_dashboard.php">WasteSeg</a>
   <div class="ml-auto">
     <span class="navbar-text mr-2">Hello, <?php echo htmlspecialchars($_SESSION['username']); ?>!</span>
@@ -49,6 +49,16 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'user') {
           <h5 class="card-title">View My Complaints</h5>
           <p class="card-text">Track your complaints and check their status.</p>
           <a href="view_complaints.php" class="btn btn-custom mt-auto">View</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-4">
+      <div class="card card-custom h-100 text-center">
+        <div class="card-body d-flex flex-column">
+          <div class="mb-3"><i class="fas fa-calendar-alt fa-3x"></i></div>
+          <h5 class="card-title">Schedules</h5>
+          <p class="card-text">See upcoming cleaning tasks and events.</p>
+          <a href="schedules.php" class="btn btn-custom mt-auto">View</a>
         </div>
       </div>
     </div>

@@ -21,7 +21,7 @@ $result = $conn->query($sql);
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
   <a class="navbar-brand" href="admin_dashboard.php">WasteSeg</a>
   <div class="ml-auto">
     <span class="navbar-text mr-2">Hello, Admin <?php echo htmlspecialchars($_SESSION['username']); ?></span>
