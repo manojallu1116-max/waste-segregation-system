@@ -13,7 +13,7 @@ A web-based complaint and waste management system developed using **PHP and MySQ
 - PHP
 - MySQL
 - HTML
-- CSS
+- CSS (Bootstrap 4 and custom `style.css`)
 - XAMPP
 
 ## How to Run
@@ -27,9 +27,10 @@ Manoj Allu
 ## Project Structure
 
 waste-segregation-system/
-├── images/
-├── uploads/
+├── images/              # sample waste type images
+├── uploads/             # complaint photo uploads
 ├── screenshots/
+├── style.css            # shared stylesheet
 │
 ├── config.php
 ├── login.php
@@ -37,4 +38,7 @@ waste-segregation-system/
 ├── complaint.php
 ├── admin_dashboard.php
 ├── user_dashboard.php
+├── admin_complaints.php
+├── view_complaints.php
+├── waste_types.php
 └── index.php

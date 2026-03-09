@@ -59,119 +59,73 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
 <meta charset="UTF-8">
 <title>Submit Complaint</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-<style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-/* Gradient animated background */
-body {
-    font-family: 'Roboto', sans-serif;
-    background: linear-gradient(135deg, #6a11cb, #2575fc, #00c6ff, #6a11cb);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
-    color: #fff;
-}
-@keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-.form-container {
-    max-width: 600px;
-    margin: 50px auto;
-    background: rgba(255,255,255,0.1);
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-}
-
-h2 { text-align: center; margin-bottom: 20px; font-size: 2rem; text-shadow: 2px 2px 8px rgba(0,0,0,0.3); }
-
-input[type=text], textarea {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border-radius: 10px;
-    border: none;
-}
-
-input[type=file] {
-    margin: 10px 0;
-}
-
-input[type=submit] {
-    width: 100%;
-    padding: 12px;
-    background: #ff9800;
-    border: none;
-    border-radius: 12px;
-    font-weight: 600;
-    color: #fff;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.3s;
-}
-input[type=submit]:hover { background: #f57c00; transform: translateY(-3px); }
-
-label { display: block; margin-top: 15px; font-weight: 500; }
-.message { text-align:center; margin-bottom:15px; font-weight:600; color:#00ff99; }
-
-.back-logout {
-    text-align: center;
-    margin-top: 25px;
-}
-.back-logout a {
-    display: inline-block;
-    margin: 0 15px;
-    padding: 10px 25px;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s;
-}
-.back-btn { background:#03a9f4; color:#fff; }
-.back-btn:hover { background:#0288d1; }
-.logout-btn { background:#f44336; color:#fff; }
-.logout-btn:hover { background:#d32f2f; }
-
-@media (max-width:768px) { .form-container { padding: 20px; } }
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="form-container">
-    <h2>Submit Complaint</h2>
-    <?php if($message): ?>
-        <div class="message"><?php echo $message; ?></div>
-    <?php endif; ?>
-    <form method="post" action="" enctype="multipart/form-data">
-        <label>Title:</label>
-        <input type="text" name="title" placeholder="Title" required>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <a class="navbar-brand" href="user_dashboard.php">WasteSeg</a>
+  <div class="ml-auto">
+    <span class="navbar-text mr-2">Hello, <?php echo htmlspecialchars($_SESSION['username']); ?>!</span>
+    <a href="logout.php" class="btn btn-outline-light btn-sm">Logout</a>
+  </div>
+</nav>
 
-        <label>Address:</label>
-        <input type="text" name="address" placeholder="Address of the place" required>
-
-        <label>Description:</label>
-        <textarea name="description" placeholder="Description" rows="5" required></textarea>
-
-        <label>Type of Waste:</label>
-        <input type="text" name="waste_type" placeholder="Enter type of waste (e.g., Plastic Bags)" required>
-
-        <label>Upload Photo 1:</label>
-        <input type="file" name="file0" accept="image/*">
-
-        <label>Upload Photo 2:</label>
-        <input type="file" name="file1" accept="image/*">
-
-        <label>Upload Photo 3:</label>
-        <input type="file" name="file2" accept="image/*">
-
-        <input type="submit" value="Submit Complaint">
-    </form>
-
-    <div class="back-logout">
-        <a href="user_dashboard.php" class="back-btn">&#8592; Back to Dashboard</a>
-        <a href="logout.php" class="logout-btn">Logout</a>
+<main class="container">
+  <div class="card card-custom mx-auto my-5" style="max-width:600px;">
+    <div class="card-body">
+      <h3 class="card-title text-center mb-4">Submit Complaint</h3>
+      <?php if($message): ?>
+        <div class="alert alert-info"><?php echo $message; ?></div>
+      <?php endif; ?>
+      <form method="post" action="" enctype="multipart/form-data">
+        <div class="form-group">
+          <label>Title</label>
+          <input type="text" name="title" class="form-control form-control-custom" placeholder="Title" required>
+        </div>
+        <div class="form-group">
+          <label>Address</label>
+          <input type="text" name="address" class="form-control form-control-custom" placeholder="Address of the place" required>
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea name="description" class="form-control form-control-custom" placeholder="Description" rows="5" required></textarea>
+        </div>
+        <div class="form-group">
+          <label>Type of Waste</label>
+          <select name="waste_type" class="form-control form-control-custom" required>
+            <option value="">Select waste type</option>
+            <option>Food Scraps</option>
+            <option>Garden Waste</option>
+            <option>Plastic</option>
+            <option>Paper</option>
+            <option>Glass</option>
+            <option>Batteries</option>
+            <option>Chemicals</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Upload Photo 1</label>
+          <input type="file" name="file0" class="form-control-file">
+        </div>
+        <div class="form-group">
+          <label>Upload Photo 2</label>
+          <input type="file" name="file1" class="form-control-file">
+        </div>
+        <div class="form-group">
+          <label>Upload Photo 3</label>
+          <input type="file" name="file2" class="form-control-file">
+        </div>
+        <button type="submit" class="btn btn-custom btn-block">Submit Complaint</button>
+      </form>
+      <div class="text-center mt-4">
+        <a href="user_dashboard.php" class="btn btn-outline-light">&#8592; Back to Dashboard</a>
+      </div>
     </div>
-</div>
+  </div>
+</main>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
